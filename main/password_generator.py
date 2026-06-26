@@ -45,8 +45,15 @@ def check_strength(password):
 
 def main():
     print("\n=== PASSWORD GENERATOR SYSTEM ===\n")
-    
-    numPasswords = int(input("How many passwords do you want to generate? "))
+    while True:
+        try:
+            numPasswords = int(input("How many passwords do you want to generate? "))
+            if numPasswords <= 0:
+                print("Enter a number greater than 0")
+                continue
+            break
+        except ValueError:
+            print("Invalid input! Please enter a number.")
     
     print("Generating " +str(numPasswords)+" passwords")
     

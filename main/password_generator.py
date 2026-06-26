@@ -36,6 +36,7 @@ def replaceWithUppercaseLetter(pword):
 
 
 def main():
+    print("\n=== PASSWORD GENERATOR SYSTEM ===\n")
     
     numPasswords = int(input("How many passwords do you want to generate? "))
     

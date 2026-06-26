@@ -1,4 +1,6 @@
 import random
+import os
+
 
 def generatePassword(pwlength):
 
@@ -49,6 +51,11 @@ def main():
 
     print("\n=== PASSWORD GENERATOR SYSTEM ===\n")
 
+    # ensure subfolder exists
+    os.makedirs("main", exist_ok=True)
+
+    file_name = os.path.join("main", "passwords.txt")
+
     while True:
         try:
             numPasswords = int(input("How many passwords do you want to generate? "))
@@ -59,7 +66,7 @@ def main():
         except ValueError:
             print("Invalid input! Please enter a number.")
 
-    print("Generating " + str(numPasswords) + " passwords\n")
+    print(f"\nGenerating {numPasswords} passwords...\n")
 
     passwordLengths = []
 
@@ -73,15 +80,17 @@ def main():
 
     Password = generatePassword(passwordLengths)
 
+    # display passwords with strength
     for i, pwd in enumerate(Password, start=1):
         strength = check_strength(pwd)
         print(f"Generated Password #{i}: {pwd} | Strength: {strength}")
 
-    with open("passwords.txt", "w") as file:
+    # save to subfolder
+    with open(file_name, "w") as file:
         for i, pwd in enumerate(Password, start=1):
             file.write(f"Generated Password #{i}: {pwd}\n")
 
-    print("\nPasswords saved to passwords.txt")
+    print(f"\nPasswords saved to {file_name}")
     print("All passwords generated successfully!")
 
 

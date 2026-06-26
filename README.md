@@ -22,7 +22,7 @@ A simple command-line Password Generator application built using Python.
 
 ## Run the Project
 '''' bash
--python password_generator.py
+- python password_generator.py
 
 ## Output
 - Generated passwords are saved in:  

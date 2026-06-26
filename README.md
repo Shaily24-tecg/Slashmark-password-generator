@@ -21,7 +21,7 @@ A simple command-line Password Generator application built using Python.
 - Python 3.x  
 
 ## Run the Project
-''''
+'''' bash
 -python password_generator.py
 
 ## Output

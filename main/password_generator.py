@@ -33,6 +33,13 @@ def replaceWithUppercaseLetter(pword):
         pword = pword[0:replace_index] + pword[replace_index].upper() + pword[replace_index+1:]
         return pword
 
+def check_strength(password):
+    if len(password) >= 10:
+        return "Strong"
+    elif len(password) >= 7:
+        return "Medium"
+    else:
+        return "Weak"
 
 
 def main():

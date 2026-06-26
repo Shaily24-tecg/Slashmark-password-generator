@@ -54,6 +54,6 @@ def main():
     Password = generatePassword(passwordLengths)
 
     for i in range(numPasswords):
-        print ("Password #"+str(i+1)+" = " + Password[i])
+        print(f"Generated Password #{i+1}: {Password[i]}")
 
 main()

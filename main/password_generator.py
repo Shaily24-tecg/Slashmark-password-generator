@@ -15,7 +15,8 @@ def generatePassword(pwlength):
         password = replaceWithNumber(password)
         password = replaceWithUppercaseLetter(password)
         
-        passwords.append(password) 
+        if password not in passwords:
+            passwords.append(password)
     
     return passwords
 

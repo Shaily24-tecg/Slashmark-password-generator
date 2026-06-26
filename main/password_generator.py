@@ -2,9 +2,7 @@ import random
 
 def generatePassword(pwlength):
 
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
-    special_chars = "!@#$%^&*" # add special characters to the alphabet
-
+    alphabet = "abcdefghijklmnopqrstuvwxyz!@#$%^&*"
     passwords = [] 
 
     for i in pwlength:

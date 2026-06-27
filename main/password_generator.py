@@ -9,17 +9,19 @@ def generatePassword(pwlength):
 
     for i in pwlength:
 
-        password = ""
+        while True:
+            password = ""
 
-        for j in range(i):
-            next_letter_index = random.randrange(len(alphabet))
-            password += alphabet[next_letter_index]
+            for j in range(i):
+                next_letter_index = random.randrange(len(alphabet))
+                password += alphabet[next_letter_index]
 
-        password = replaceWithNumber(password)
-        password = replaceWithUppercaseLetter(password)
+            password = replaceWithNumber(password)
+            password = replaceWithUppercaseLetter(password)
 
-        if password not in passwords:
-            passwords.append(password)
+            if password not in passwords:
+                passwords.append(password)
+                break
 
     return passwords
 
@@ -39,9 +41,17 @@ def replaceWithUppercaseLetter(pword):
 
 
 def check_strength(password):
-    if len(password) >= 10:
+
+    has_upper = any(c.isupper() for c in password)
+    has_lower = any(c.islower() for c in password)
+    has_digit = any(c.isdigit() for c in password)
+    has_special = any(c in "!@#$%^&*" for c in password)
+
+    score = sum([has_upper, has_lower, has_digit, has_special])
+
+    if len(password) >= 10 and score == 4:
         return "Strong"
-    elif len(password) >= 7:
+    elif len(password) >= 7 and score >= 3:
         return "Medium"
     else:
         return "Weak"
@@ -51,7 +61,6 @@ def main():
 
     print("\n=== PASSWORD GENERATOR SYSTEM ===\n")
 
-    # ensure subfolder exists
     os.makedirs("main", exist_ok=True)
 
     file_name = os.path.join("main", "passwords.txt")
@@ -73,25 +82,30 @@ def main():
     print("Minimum length of password should be 6")
 
     for i in range(numPasswords):
-        length = int(input(f"Enter the length of Password #{i+1}: "))
-        if length < 6:
-            length = 6
-        passwordLengths.append(length)
+        while True:
+            try:
+                length = int(input(f"Enter the length of Password #{i+1}: "))
+                if length < 6:
+                    print("Minimum length is 6. Setting it to 6.")
+                    length = 6
+                passwordLengths.append(length)
+                break
+            except ValueError:
+                print("Invalid input! Please enter a valid number.")
 
     Password = generatePassword(passwordLengths)
 
-    # display passwords with strength
-    for i, pwd in enumerate(Password, start=1):
-        strength = check_strength(pwd)
-        print(f"Generated Password #{i}: {pwd} | Strength: {strength}")
+    print("\nGenerated Passwords:\n")
 
-    # save to subfolder
     with open(file_name, "w") as file:
         for i, pwd in enumerate(Password, start=1):
-            file.write(f"Generated Password #{i}: {pwd}\n")
+            strength = check_strength(pwd)
+            print(f"Generated Password #{i}: {pwd} | Strength: {strength}")
+            file.write(f"Generated Password #{i}: {pwd} | Strength: {strength}\n")
 
     print(f"\nPasswords saved to {file_name}")
     print("All passwords generated successfully!")
 
 
-main()
+if __name__ == "__main__":
+    main()

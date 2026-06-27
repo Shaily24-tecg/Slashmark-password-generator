@@ -95,10 +95,8 @@ def main():
 
     Password = generatePassword(passwordLengths)
 
-    print("\nGenerated Passwords:\n")
-
     with open(file_name, "w") as file:
-        print("My passwords\n\n")
+        print("\n=== My passwords ===\n")
 
         for i, pwd in enumerate(Password, start=1):
             strength = check_strength(pwd)

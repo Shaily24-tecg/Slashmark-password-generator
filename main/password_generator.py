@@ -97,7 +97,11 @@ def main():
 
     print("\nGenerated Passwords:\n")
 
-    with open(file_name, "a") as file:
+    with open(file_name, "w") as file:
+        file.write("\n" + "=" * 40 + "\n")
+        file.write("NEW PASSWORDS\n")
+        file.write("=" * 40 + "\n")
+
         for i, pwd in enumerate(Password, start=1):
             strength = check_strength(pwd)
             print(f"Generated Password #{i}: {pwd} | Strength: {strength}")

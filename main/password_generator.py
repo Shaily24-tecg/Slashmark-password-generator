@@ -67,7 +67,7 @@ def main():
 
     while True:
         try:
-            numPasswords = int(input("How many passwords do you want to generate? "))
+            numPasswords = int(input("Enter the number of passwords to generate: "))
             if numPasswords <= 0:
                 print("Enter a number greater than 0")
                 continue
@@ -98,6 +98,7 @@ def main():
     print("\nGenerated Passwords:\n")
 
     with open(file_name, "w") as file:
+        print("My passwords\n\n")
 
         for i, pwd in enumerate(Password, start=1):
             strength = check_strength(pwd)
